@@ -1,8 +1,8 @@
-#include <vector>
-#include <algorithm>
-
 #ifndef SEMISPLIT_H
 #define SEMISPLIT_H
+
+#include <vector>
+#include <algorithm>
 
 template <class T>
 std::vector<std::vector<T>> SemiSplit(std::vector<T> &InVec) {
