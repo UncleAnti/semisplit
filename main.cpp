@@ -9,18 +9,41 @@
 
 #include <vector>
 #include <algorithm>
-#include <iostream>
+#include <fmt/core.h>
+#include <fmt/format.h>
 
+using T = std::vector<int>;
+
+template <> struct fmt::formatter<T> {
+	constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
+		return ctx.begin();
+	}
+
+	template <typename FormatContext>
+	auto format(const T& arg, FormatContext& ctx) -> decltype(ctx.out()) {
+		std::string output;
+		for (const auto &it : arg)
+			output += fmt::format("{:3},", it);
+
+		if (!output.empty())
+			output.resize(output.size()-1);
+
+		return format_to(ctx.out(), "[{}]", output);
+	}
+};
 
 int main() {
-	std::vector<int> sample { 0,4,7,9,12,13,14,20 };
-	std::vector<std::vector<int>> results = SemiSplit(sample);
+	T sample { 0,4,7,9,12,13,14,20 };
+	std::vector<T> results = SemiSplit(sample);
 
-	for (const auto & first : results) {
-		std::cout << "Set size = " << first.size() << "\n";
+	fmt::print("Sample[{}] = {}\n", sample.size(), sample);
 
-		for (const auto & second : first) {
-			std::cout << second << '\n';
-		}
-	}
+	std::string output;
+	for (const auto & first : results)
+		output += fmt::format("{},", first);
+
+	if (!output.empty())
+		output.resize(output.size()-1);
+
+	fmt::print("Output[{}] = [{}]\n", results.size(),  output);
 }
