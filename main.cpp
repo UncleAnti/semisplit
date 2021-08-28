@@ -17,7 +17,7 @@ int main() {
 
 	for (const auto & first : results) {
 		std::cout << "Set size = " << first.size() << "\n";
-		
+
 		for (const auto & second : first) {
 			std::cout << second << '\n';
 		}
