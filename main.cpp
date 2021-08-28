@@ -12,15 +12,16 @@
 #include <fmt/core.h>
 #include <fmt/format.h>
 
-using T = std::vector<int>;
+#define SplitContainer std::vector
+#define SampleContainer std::vector<int>
 
-template <> struct fmt::formatter<T> {
+template <> struct fmt::formatter<SampleContainer> {
 	constexpr auto parse(format_parse_context& ctx) -> decltype(ctx.begin()) {
 		return ctx.begin();
 	}
 
 	template <typename FormatContext>
-	auto format(const T& arg, FormatContext& ctx) -> decltype(ctx.out()) {
+	auto format(const SampleContainer& arg, FormatContext& ctx) -> decltype(ctx.out()) {
 		std::string output;
 		for (const auto &it : arg)
 			output += fmt::format("{:3},", it);
@@ -33,8 +34,9 @@ template <> struct fmt::formatter<T> {
 };
 
 int main() {
-	T sample { 0,4,7,9,12,13,14,20 };
-	std::vector<T> results = SemiSplit(sample);
+	SampleContainer sample { 0,4,7,9,12,13,14,20 };
+	auto results = SemiSplit<SplitContainer>(sample);
+//	auto results = SemiSplit(sample);
 
 	fmt::print("Sample[{}] = {}\n", sample.size(), sample);
 

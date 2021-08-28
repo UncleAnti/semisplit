@@ -4,13 +4,14 @@
 #include <vector>
 #include <algorithm>
 
-template <class T>
-std::vector<T> SemiSplit(T &InVec) {
-	std::vector<T> OutVecVec;
+template < template<typename,typename> class Container = std::vector, class T >
+Container<T, std::allocator<T>> SemiSplit(T &InVec) {
+	Container<T, std::allocator<T>> OutVecVec;
 
 	std::sort(InVec.begin(), InVec.end());					// Sort List
-	const auto &it = std::unique(InVec.begin(), InVec.end());		// Find Unique
-	InVec.resize(std::distance(InVec.begin(), it) );			// Drop extras
+
+	const auto it = std::unique(InVec.begin(), InVec.end());		// Find Unique
+	InVec.resize( std::distance(InVec.begin(), it) );			// Drop extras
 
 	T tmpList;
 	for(auto vit = InVec.begin(); vit != InVec.end(); ++vit) {
