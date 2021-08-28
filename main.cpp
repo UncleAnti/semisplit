@@ -5,11 +5,12 @@
  *      Author: UncleAnti
  */
 
+#include "semisplit.h"
+
 #include <vector>
 #include <algorithm>
 #include <iostream>
 
-#include "semisplit.h"
 
 int main() {
 	std::vector<int> sample { 0,4,7,9,12,13,14,20 };
