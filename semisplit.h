@@ -28,7 +28,7 @@ std::vector<std::vector<T>> SemiSplit(std::vector<T> &InVec) {
 				if (curNumber + 2 == nextNumber)		// Make it consecutive?
 					tmpList.push_back(curNumber + 1);	// Push a dummy
 				else
-					OutVecVec.emplace_back(tmpList);	// Push list and start again
+					OutVecVec.emplace_back(move(tmpList));	// Push list and start again
 			}
 		} else
 			OutVecVec.emplace_back(tmpList);			// Push list and end
